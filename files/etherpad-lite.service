@@ -1,0 +1,17 @@
+[Unit]
+Description=Etherpad-lite, the collaborative editor.
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=eplite
+Group=root
+WorkingDirectory=/var/www/etherpad-lite
+Environment=NODE_ENV=production
+
+ExecStart=/usr/local/bin/node --stack_size=1968 node_modules/ep_etherpad-lite/node/server.js >> /var/log/eplite/access.log 2>> /var/log/eplite/error.log
+
+Restart=always 
+
+[Install]
+WantedBy=multi-user.target
